@@ -93,10 +93,6 @@ class Solution:
                 visited.add(idx + 1)
 
 
-
-
-
-
 examples = [
     ([100, -23, -23, 404, 100, 23, 23, 23, 3, 404], 3),
     ([7], 0),

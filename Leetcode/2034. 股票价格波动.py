@@ -92,50 +92,51 @@
 
 
 class Node:
-    def __init__(self,  data, next, prior):
+    def __init__(self, data, next, prior):
         self.data = data
         self.next = next
         self.prior = prior
+
 
 class SortList:
     def __init__(self):
         self.head = Node(0, None, None)
         self.tail = Node(float("inf"), None, None)
-        self.head.next=self.tail
-        self.tail.prior=self.head
-        self.size=0
+        self.head.next = self.tail
+        self.tail.prior = self.head
+        self.size = 0
 
-    def add(self,x):
-        p=self.head
-        while x> p.next.data:
-            p=p.next
-        s=Node(x,p.next,p)
-        p.next.prior=s
-        p.next=s
-        self.size+=1
-
-    def discard(self,x):
-        p = self.head.next
-        while x != p.data and p!=self.tail:
+    def add(self, x):
+        p = self.head
+        while x > p.next.data:
             p = p.next
-        if p==self.tail:
+        s = Node(x, p.next, p)
+        p.next.prior = s
+        p.next = s
+        self.size += 1
+
+    def discard(self, x):
+        p = self.head.next
+        while x != p.data and p != self.tail:
+            p = p.next
+        if p == self.tail:
             print("x is not in list")
             return
-        p.next.prior= p.prior
-        p.prior.next=p.next
+        p.next.prior = p.prior
+        p.prior.next = p.next
         del p
-        self.size-=1
+        self.size -= 1
 
     def __getitem__(self, item):
-        if item>=self.size or -item-1>=self.size:
+        if item >= self.size or -item - 1 >= self.size:
             print("index out of range")
             return
-        if item>=0:
-            p=self.head
-            count=0
-            while  count<item:
-                p=p.next
-                count+=1
+        if item >= 0:
+            p = self.head
+            count = 0
+            while count < item:
+                p = p.next
+                count += 1
             return p.next.data
         else:
             p = self.tail
@@ -146,28 +147,28 @@ class SortList:
             return p.data
 
     def __str__(self):
-        data_list=[]
-        p=self.head.next
-        while p!=self.tail:
+        data_list = []
+        p = self.head.next
+        while p != self.tail:
             data_list.append(p.data)
-            p=p.next
-        return " ".join(map(str,data_list))
+            p = p.next
+        return " ".join(map(str, data_list))
 
 
 class StockPrice:
 
     def __init__(self):
-        self.price=SortList()
-        self.time_price={}
-        self.current_time_price=[0,0]
+        self.price = SortList()
+        self.time_price = {}
+        self.current_time_price = [0, 0]
 
     def update(self, timestamp, price) -> None:
         if timestamp in self.time_price:
             self.price.discard(self.time_price[timestamp])
         self.price.add(price)
-        self.time_price[timestamp]=price
-        if timestamp>=self.current_time_price[0]:
-            self.current_time_price=[timestamp,price]
+        self.time_price[timestamp] = price
+        if timestamp >= self.current_time_price[0]:
+            self.current_time_price = [timestamp, price]
 
     def current(self) -> int:
         return self.current_time_price[1]
@@ -179,12 +180,12 @@ class StockPrice:
         return self.price[0]
 
 
-stockPrice=StockPrice()
-stockPrice.update(1,10)
-#print(stockPrice.price)
-stockPrice.update(2,5)
-#print(stockPrice.price)
-stockPrice.update(1,3)
+stockPrice = StockPrice()
+stockPrice.update(1, 10)
+# print(stockPrice.price)
+stockPrice.update(2, 5)
+# print(stockPrice.price)
+stockPrice.update(1, 3)
 print(stockPrice.maximum())
 print(stockPrice.price)
 print(stockPrice.minimum())

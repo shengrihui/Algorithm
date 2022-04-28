@@ -6,7 +6,7 @@ class Solution:
         m, n = len(grid), len(grid[0])
 
         def DFS(row, col):
-            if row == m :
+            if row == m:
                 return col
             if grid[row][col] == 1:
                 if col == n - 1 or grid[row][col + 1] == -1:
@@ -28,7 +28,7 @@ examples = [
     [dict(grid=[[-1]]), [-1]],
     [dict(grid=[[1, 1, 1, 1, 1, 1], [-1, -1, -1, -1, -1, -1], [1, 1, 1, 1, 1, 1], [-1, -1, -1, -1, -1, -1]]),
      [0, 1, 2, 3, 4, -1]],
-    [dict(grid=[[1]]),[-1]]
+    [dict(grid=[[1]]), [-1]]
 ]
 
 solution = Solution()

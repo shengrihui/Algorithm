@@ -1,9 +1,6 @@
 from sortedcontainers import SortedList
 
-
-
-
-            # exit(0)
+# exit(0)
 
 
 example = [

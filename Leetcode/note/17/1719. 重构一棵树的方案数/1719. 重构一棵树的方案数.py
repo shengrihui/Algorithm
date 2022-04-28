@@ -1,5 +1,7 @@
 # https://leetcode-cn.com/problems/number-of-ways-to-reconstruct-a-tree/
 from collections import defaultdict
+
+
 class Solution:
     def checkWays(self, pairs) -> int:
         adj = defaultdict(set)
@@ -10,7 +12,7 @@ class Solution:
         for x in adj:
             adj[x].add(x)
         for i in adj:
-            print(i,adj[i])
+            print(i, adj[i])
         adj = sorted(adj.values(), key=lambda item: len(item))
         n = len(adj)
         if len(adj[-1]) < n:
@@ -64,7 +66,7 @@ class Solution:
             # # if parent == -1 or not neighbours.issubset(adj[parent]):
             # # ??
             # if parent == -1 or any(neighbour != parent and neighbour not in adj[parent] for neighbour in neighbours):
-            print(neighbours,parent)
+            print(neighbours, parent)
             print([neighbour != parent for neighbour in neighbours])
             print([neighbour not in adj[parent] for neighbour in neighbours])
             print([neighbour != parent and neighbour not in adj[parent] for neighbour in neighbours])
@@ -75,6 +77,7 @@ class Solution:
                 ans = 2
         return ans
 
+
 # 作者：LeetCode-Solution
 # 链接：https://leetcode-cn.com/problems/number-of-ways-to-reconstruct-a-tree/solution/zhong-gou-yi-ke-shu-de-fang-an-shu-by-le-36e1/
 # 来源：力扣（LeetCode）
@@ -84,7 +87,7 @@ examples = [
     [[[1, 2], [2, 3]], 1],
     [[[1, 2], [2, 3], [1, 3]], 2],
     [[[1, 2], [2, 3], [2, 4], [1, 5]], 0],
-   [[[3,4],[2,3],[4,5],[2,4],[2,5],[1,5],[1,4]],0]
+    [[[3, 4], [2, 3], [4, 5], [2, 4], [2, 5], [1, 5], [1, 4]], 0]
 ]
 solution = Solution()
 for data, ans in examples:
